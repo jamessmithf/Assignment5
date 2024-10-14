@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Assignment5.MainPage">
+    
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+               
+            <!-- Заголовок сторінки -->
+            <Label Text="Перелік товарів"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Grid.Row="0" />
+
+            <!-- Перелік товарів з рамкою -->
+            <CollectionView x:Name="ProductsGrid" SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{Binding FrameColor}" BorderColor="Gray" CornerRadius="5" Padding="10" Margin="5">
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Детальна інформація про товар -->
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnProductTapped" CommandParameter="{Binding}" />
+                                </Grid.GestureRecognizers>
+
+                                <Label Grid.Column="0" Text="{Binding Name}" />
+                                <Label Grid.Column="1" Text="{Binding Price}" />
+                                <Label Grid.Column="2" Text="{Binding OriginCountry}" />
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Кнопки для додавання/видалення товарів -->
+            <StackLayout Padding="0,20,0,0" Orientation="Horizontal" HorizontalOptions="Center">
+                <Button BackgroundColor="DeepSkyBlue" Margin="20" Text="Додати товар" Clicked="OnAddProductClicked" />
+                <Button BackgroundColor="CadetBlue" Margin="20" Text="Видалити товар" Clicked="OnRemoveProductClicked" />
+            </StackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
